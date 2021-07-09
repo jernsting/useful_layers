@@ -26,9 +26,9 @@ jobs:
         python setup.py egg_info
         FILE=useful_layers.egg-info/requires.txt
         if test -f "$FILE"; then
-        pip install pytorch pytest pytest-cov coveralls -r useful_layers.egg-info/requires.txt
+        pip install torch pytest pytest-cov coveralls -r useful_layers.egg-info/requires.txt
         else
-        pip install pytorch pytest pytest-cov coveralls
+        pip install torch pytest pytest-cov coveralls
         fi
         pip install .
          
