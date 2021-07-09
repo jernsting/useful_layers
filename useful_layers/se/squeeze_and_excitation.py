@@ -22,7 +22,7 @@ class SqueezeAndExcitation2D(nn.Module):
             in_channels (int): Number of input channels
             reduction (int, optional): Degree of reduction. Defaults to 2.
         """
-        super().__init__()
+        super(SqueezeAndExcitation2D, self).__init__()
         self.conv1 = nn.Conv2d(in_channels=in_channels,
                                out_channels=in_channels // reduction,
                                kernel_size=1,
@@ -61,7 +61,7 @@ class SqueezeAndExcitation3D(nn.Module):
             in_channels (int): Number of input channels
             reduction (int, optional): Degree of reduction. Defaults to 2.
         """
-        super().__init__()
+        super(SqueezeAndExcitation3D, self).__init__()
         self.conv1 = nn.Conv3d(in_channels=in_channels,
                                out_channels=in_channels // reduction,
                                kernel_size=1,
