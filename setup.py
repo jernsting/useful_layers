@@ -22,5 +22,5 @@ Useful Layers is a torch based library containing some experimental, but useful 
     download_url='https://github.com/jernsting/useful_layers/archive/' + __version__ + '.tar.gz',
     keywords=['machine learning', 'deep learning', 'experimental', 'science'],
     classifiers=[],
-    install_requires=[]
+    # install_requires=[]
 )
