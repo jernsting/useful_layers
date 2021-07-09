@@ -23,3 +23,4 @@ markdown_extensions:
 nav: 
 - Home: 'index.md'
 - Squeeze and Excitation: 'se/squeeze_and_excitation.md'
+- Channel Attention: 'channel_attention/channel_attention.md'
