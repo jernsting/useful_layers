@@ -37,10 +37,10 @@ class ChannelAttention2D(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         b, c, h, w = x.size()
-        avg = torch.mean(x.view(b, c, -1), dim=-1).view(b, c, 1, 1)
-        max = torch.max(x.view(b, c, -1), dim=-1).values.view(b, c, 1, 1)
-        avg_comp = self.conv2(F.relu(self.conv1(avg)))
-        max_comp = self.conv2(F.relu(self.conv1(max)))
+        avg_comp = torch.mean(x.view(b, c, -1), dim=-1).view(b, c, 1, 1)
+        max_comp = torch.max(x.view(b, c, -1), dim=-1).values.view(b, c, 1, 1)
+        avg_comp = self.conv2(F.relu(self.conv1(avg_comp)))
+        max_comp = self.conv2(F.relu(self.conv1(max_comp)))
         return F.sigmoid(avg_comp + max_comp)
 
 
@@ -60,7 +60,7 @@ class ChannelAttention3D(nn.Module):
             in_channels (int): Number of input channels
             reduction (int, optional): Degree of reduction. Defaults to 2.
         """
-        super(ChannelAttention2D, self).__init__()
+        super(ChannelAttention3D, self).__init__()
         self.conv1 = nn.Conv3d(in_channels=in_channels,
                                out_channels=in_channels // reduction,
                                kernel_size=1,
@@ -76,8 +76,8 @@ class ChannelAttention3D(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         b, c, d, h, w = x.size()
-        avg = torch.mean(x.view(b, c, -1), dim=-1).view(b, c, 1, 1, 1)
-        max = torch.max(x.view(b, c, -1), dim=-1).values.view(b, c, 1, 1, 1)
-        avg_comp = self.conv2(F.relu(self.conv1(avg)))
-        max_comp = self.conv2(F.relu(self.conv1(max)))
+        avg_comp = torch.mean(x.view(b, c, -1), dim=-1).view(b, c, 1, 1, 1)
+        max_comp = torch.max(x.view(b, c, -1), dim=-1).values.view(b, c, 1, 1, 1)
+        avg_comp = self.conv2(F.relu(self.conv1(avg_comp)))
+        max_comp = self.conv2(F.relu(self.conv1(max_comp)))
         return F.sigmoid(avg_comp + max_comp)
