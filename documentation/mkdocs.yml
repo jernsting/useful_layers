@@ -1,0 +1,25 @@
+site_name: useful layers
+repo_name: useful_layers
+site_url: https://github.com/jernsting/useful_layers
+site_dir: '../docs'
+
+# Theme configuration
+theme: 
+  name: 'material'
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+
+# extensions
+markdown_extensions:
+  - pymdownx.arithmatex
+  - codehilite
+  - admonition
+
+# Site structure
+nav: 
+- Home: 'index.md'
+- Squeeze and Excitation: 'se/squeeze_and_excitation.md'
