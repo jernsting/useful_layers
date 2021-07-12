@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 
+from useful_layers.utils import reduction_network
+
 __all__ = ['SqueezeAndExcitation2D', 'SqueezeAndExcitation3D']
 
 
@@ -23,18 +25,7 @@ class SqueezeAndExcitation2D(nn.Module):
             reduction (int, optional): Degree of reduction. Defaults to 2.
         """
         super(SqueezeAndExcitation2D, self).__init__()
-        self.conv1 = nn.Conv2d(in_channels=in_channels,
-                               out_channels=in_channels // reduction,
-                               kernel_size=1,
-                               stride=1,
-                               padding=0,
-                               bias=True)
-        self.conv2 = nn.Conv2d(in_channels=in_channels // reduction,
-                               out_channels=in_channels,
-                               kernel_size=1,
-                               stride=1,
-                               padding=0,
-                               bias=True)
+        self.conv1, self.conv2 = reduction_network(in_channels, reduction, "2d")
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         b, c, h, w = x.size()
@@ -62,18 +53,7 @@ class SqueezeAndExcitation3D(nn.Module):
             reduction (int, optional): Degree of reduction. Defaults to 2.
         """
         super(SqueezeAndExcitation3D, self).__init__()
-        self.conv1 = nn.Conv3d(in_channels=in_channels,
-                               out_channels=in_channels // reduction,
-                               kernel_size=1,
-                               stride=1,
-                               padding=0,
-                               bias=True)
-        self.conv2 = nn.Conv3d(in_channels=in_channels // reduction,
-                               out_channels=in_channels,
-                               kernel_size=1,
-                               stride=1,
-                               padding=0,
-                               bias=True)
+        self.conv1, self.conv2 = reduction_network(in_channels, reduction, "3d")
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         b, c, d, h, w = x.size()

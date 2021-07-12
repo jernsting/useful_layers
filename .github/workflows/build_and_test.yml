@@ -32,12 +32,10 @@ jobs:
         fi
         pip install .
          
-# todo
-#    - name: Test with pytest
-#      run: |
-#        PYTHONPATH=./ pytest ./test --cov=./photonai
-#    - name: Coveralls
-#      run: coveralls
-#      env: 
-#        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Test with pytest
+      run: |
+        PYTHONPATH=./ pytest ./test --cov=./useful_layers
+    - name: Coveralls
+      run: coveralls
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
