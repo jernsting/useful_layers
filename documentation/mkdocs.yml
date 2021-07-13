@@ -22,5 +22,11 @@ markdown_extensions:
 # Site structure
 nav: 
 - Home: 'index.md'
-- Squeeze and Excitation: 'se/squeeze_and_excitation.md'
-- Channel Attention: 'channel_attention/channel_attention.md'
+- Layers:
+  - Layers Introduction: 'layers/Layers.md'
+  - Squeeze and Excitation: 'layers/se/squeeze_and_excitation.md'
+  - Channel Attention: 'layers/channel_attention/channel_attention.md'
+- Blocks:
+    - Block Introduction: 'blocks/Blocks.md'
+    - ScalingBlock: 'blocks/ScalingBlock/ScalingBlock.md'
+- Extending useful_layers: 'Extending.md'
