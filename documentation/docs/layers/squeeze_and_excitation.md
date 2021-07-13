@@ -25,8 +25,8 @@ import useful_layers as ul
 class demo(torch.nn.Module):
     def __init__(self, in_channels):
         # ...
-        self.layer = ul.SqueezeAndExcitation2D(in_channels=in_channels,
-                            	               reduction=2)
+        self.layer = ul.layers.SqueezeAndExcitation2D(in_channels=in_channels,
+                                                      reduction=2)
 
     def forward(self, x):
         se_map = self.layer(x)   # This map is not applied!
@@ -58,8 +58,8 @@ import useful_layers as ul
 class demo(torch.nn.Module):
     def __init__(self, in_channels):
         # ...
-        self.layer = ul.SqueezeAndExcitation3D(in_channels=in_channels,
-                            	               reduction=2)
+        self.layer = ul.layers.SqueezeAndExcitation3D(in_channels=in_channels,
+                            	                      reduction=2)
 
     def forward(self, x):
         se_map = self.layer(x)   # This map is not applied!

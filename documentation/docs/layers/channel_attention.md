@@ -23,8 +23,8 @@ import torch
 import useful_layers as ul
 
 
-layer = ul.ChannelAttention2D(in_channels=5,
-                              reduction=2)
+layer = ul.layers.ChannelAttention2D(in_channels=5,
+                                     reduction=2)
 ```
 
 
@@ -50,6 +50,6 @@ import torch
 import useful_layers as ul
 
 
-layer = ul.ChannelAttention3D(in_channels=5,
-                              reduction=2)
+layer = ul.layers.ChannelAttention3D(in_channels=5,
+                                     reduction=2)
 ```
