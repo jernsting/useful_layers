@@ -1,5 +1,6 @@
 import unittest
 import torch
+import torch.nn as nn
 import numpy as np
 
 import useful_layers as ul
@@ -36,6 +37,25 @@ class ChannelAttention3DTest(unittest.TestCase):
         self.assertListEqual([dummy_input.shape[0], dummy_input.shape[1], 1, 1, 1], list(output.shape),
                              'The shape of input and output should match')
 
+
+class UnknownChannelAttentionTest(unittest.TestCase):
+
+    def test_unknown_channel_attention(self):
+        from useful_layers.layers.channel_attention.channel_attention import _ChannelAttention
+
+        class DummyAttention(_ChannelAttention):
+            def __init__(self):
+                super(DummyAttention, self).__init__()
+                self.conv1 = nn.Conv2d(5, 1, 7)
+                self.conv2 = nn.Conv2d(5, 1, 7)
+
+        try:
+            dummy_input = torch.randn(1, 5, 3, 3)
+            da = DummyAttention()
+            da(dummy_input)
+            self.fail("DummyAttention forward() call passed")
+        except NotImplementedError:
+            pass
 
 if __name__ == '__main__':
     unittest.main()
