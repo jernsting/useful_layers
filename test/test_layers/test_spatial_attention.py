@@ -11,7 +11,7 @@ class SpatialAttention2DTest(unittest.TestCase):
         dummy_input = torch.randn(2, 3, 5, 5)
         layer = ul.layers.SpatialAttention2D(3, 3)
 
-        output = layer(dummy_input).detach().numpy()
+        output = layer(dummy_input).detach()
         self.assertListEqual([2, 1, 5, 5], list(output.shape))
 
 
@@ -21,7 +21,7 @@ class SpatialAttention3DTest(unittest.TestCase):
         dummy_input = torch.randn(2, 3, 5, 5, 5)
         layer = ul.layers.SpatialAttention3D(3, 3)
 
-        output = layer(dummy_input).detach().numpy()
+        output = layer(dummy_input).detach()
         self.assertListEqual([2, 1, 5, 5, 5], list(output.shape))
 
 
