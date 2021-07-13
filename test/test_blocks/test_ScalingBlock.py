@@ -34,13 +34,13 @@ class ScalingBlockTest(unittest.TestCase):
 
     def test_nonexisting_layer(self):
         try:
-            block = ul.blocks.ScalingBlock(None)
+            ul.blocks.ScalingBlock(None)
             self.fail("Block accepted None layer")
         except ValueError:
             pass
 
         try:
-            block = ul.blocks.ScalingBlock(ul.blocks.ScalingBlock)
+            ul.blocks.ScalingBlock(ul.blocks.ScalingBlock)
             self.fail("Block accepted block")
         except ValueError:
             pass
