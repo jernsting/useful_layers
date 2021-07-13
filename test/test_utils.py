@@ -1,5 +1,7 @@
 import unittest
 import torch.nn as nn
+
+import useful_layers
 from useful_layers.utils import reduction_network
 
 
@@ -28,3 +30,6 @@ class UtilsTest(unittest.TestCase):
         except ValueError:
             pass
 
+
+if __name__ == '__main__':
+    unittest.main()

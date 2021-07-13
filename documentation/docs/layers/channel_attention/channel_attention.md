@@ -10,6 +10,10 @@ Simple ChannelAttention for 2D filters.
 | in_channels | int | Number of input channels|
 | reduction | int, default=2 | Degree of reduction |
 
+#### Return Value
+The returned value is the channel attention map. 
+This map is not applied to the original input in any way.
+
 #### Example
 
 A simple usage example without context:
@@ -32,6 +36,10 @@ Simple ChannelAttention for 3D filters.
 | -----     | ----- | ----- |
 | in_channels | int | Number of input channels|
 | reduction | int, default=2 | Degree of reduction |
+
+#### Return Value
+The returned value is the channel attention map. 
+This map is not applied to the original input in any way.
 
 #### Example
 

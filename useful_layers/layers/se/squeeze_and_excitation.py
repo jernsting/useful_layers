@@ -1,13 +1,13 @@
 import torch
-import torch.nn as nn
 from torch.nn import functional as F
 
 from useful_layers.utils import reduction_network
+from useful_layers.layers.ABCLayer import Layer
 
 __all__ = ['SqueezeAndExcitation2D', 'SqueezeAndExcitation3D']
 
 
-class SqueezeAndExcitation2D(nn.Module):
+class SqueezeAndExcitation2D(Layer):
     """SqueezeAndExcitation2D
 
         Simple squeeze and excitation layer.
@@ -28,14 +28,22 @@ class SqueezeAndExcitation2D(nn.Module):
         self.conv1, self.conv2 = reduction_network(in_channels, reduction, "2d")
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Forward function
+
+        Args:
+            x: Input tensor
+
+        Returns:
+            torch.tensor: The SE-Tensor
+        """
         b, c, h, w = x.size()
         out = torch.mean(x.view(b, c, -1), dim=-1).view(b, c, 1, 1)
         out = F.relu(self.conv1(out))
         out = self.conv2(out)
-        return torch.sigmoid(out) * x
+        return torch.sigmoid(out)
 
 
-class SqueezeAndExcitation3D(nn.Module):
+class SqueezeAndExcitation3D(Layer):
     """SqueezeAndExcitation3D
 
         Simple squeeze and excitation layer.
@@ -56,8 +64,16 @@ class SqueezeAndExcitation3D(nn.Module):
         self.conv1, self.conv2 = reduction_network(in_channels, reduction, "3d")
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Forward function
+
+        Args:
+            x: Input tensor
+
+        Returns:
+            torch.Tensor: The SE-Tensor
+        """
         b, c, d, h, w = x.size()
         out = torch.mean(x.view(b, c, -1), dim=-1).view(b, c, 1, 1, 1)
         out = F.relu(self.conv1(out))
         out = self.conv2(out)
-        return torch.sigmoid(out) * x
+        return torch.sigmoid(out)
