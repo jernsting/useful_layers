@@ -13,7 +13,7 @@
 ## Install
 
 ```bash
-pip install git+https://github.com/jernsting/useful_layers
+pip install useful-layers
 ```
 
 ## Documentation
