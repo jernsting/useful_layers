@@ -37,5 +37,22 @@ class SqueezeAndExcitation3DTest(unittest.TestCase):
                              'The shape of input and output should match')
 
 
+class UnknownSqueezeAndExcitationTest(unittest.TestCase):
+
+    def test_unknown_squeeze_and_excitation(self):
+        from useful_layers.layers.se.squeeze_and_excitation import _SqueezeAndExcitation
+
+        class DummySE(_SqueezeAndExcitation):
+            self.conv1 = torch.nn.Conv2d(5, 1, 1)
+            self.conv2 = torch.nn.Conv2d(1, 1, 1)
+
+        try:
+            dummy_input = torch.randn(2, 5, 3, 3)
+            se = DummySE()
+            se(dummy_input)
+            self.fail("Unknown SqueezeAndExcitation layer passed")
+        except NotImplementedError:
+            pass
+
 if __name__ == '__main__':
     unittest.main()

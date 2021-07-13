@@ -7,7 +7,25 @@ from useful_layers.layers.ABCLayer import Layer
 __all__ = ['SqueezeAndExcitation2D', 'SqueezeAndExcitation3D']
 
 
-class SqueezeAndExcitation2D(Layer):
+class _SqueezeAndExcitation(Layer):
+    def __init__(self):
+        super(_SqueezeAndExcitation, self).__init__()
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        size = x.size()
+        if isinstance(self, SqueezeAndExcitation2D):
+            view = (size[0], size[1], 1, 1)
+        elif isinstance(self, SqueezeAndExcitation3D):
+            view = (size[0], size[1], 1, 1, 1)
+        else:
+            raise NotImplementedError(f'Expected to be SqueezeAndExcitation2D or -3D, got {self}')
+        out = torch.mean(x.view(size[0], size[1], -1), dim=-1).view(*view)
+        out = F.relu(self.conv1(out))
+        out = self.conv2(out)
+        return torch.sigmoid(out)
+
+
+class SqueezeAndExcitation2D(_SqueezeAndExcitation):
     """SqueezeAndExcitation2D
 
         Simple squeeze and excitation layer.
@@ -27,23 +45,8 @@ class SqueezeAndExcitation2D(Layer):
         super(SqueezeAndExcitation2D, self).__init__()
         self.conv1, self.conv2 = reduction_network(in_channels, reduction, "2d")
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward function
 
-        Args:
-            x: Input tensor
-
-        Returns:
-            torch.tensor: The SE-Tensor
-        """
-        b, c, h, w = x.size()
-        out = torch.mean(x.view(b, c, -1), dim=-1).view(b, c, 1, 1)
-        out = F.relu(self.conv1(out))
-        out = self.conv2(out)
-        return torch.sigmoid(out)
-
-
-class SqueezeAndExcitation3D(Layer):
+class SqueezeAndExcitation3D(_SqueezeAndExcitation):
     """SqueezeAndExcitation3D
 
         Simple squeeze and excitation layer.
@@ -62,18 +65,3 @@ class SqueezeAndExcitation3D(Layer):
         """
         super(SqueezeAndExcitation3D, self).__init__()
         self.conv1, self.conv2 = reduction_network(in_channels, reduction, "3d")
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward function
-
-        Args:
-            x: Input tensor
-
-        Returns:
-            torch.Tensor: The SE-Tensor
-        """
-        b, c, d, h, w = x.size()
-        out = torch.mean(x.view(b, c, -1), dim=-1).view(b, c, 1, 1, 1)
-        out = F.relu(self.conv1(out))
-        out = self.conv2(out)
-        return torch.sigmoid(out)
