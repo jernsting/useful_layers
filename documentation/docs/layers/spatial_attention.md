@@ -1,5 +1,5 @@
 # Spatial Attention
-Basic channel attention as presented in [arxiv](https://arxiv.org/pdf/1807.06521v2.pdf)
+Basic spatial attention as presented in [arxiv](https://arxiv.org/pdf/1807.06521v2.pdf)
 
 ## Class - SpatialAttention2D
 
