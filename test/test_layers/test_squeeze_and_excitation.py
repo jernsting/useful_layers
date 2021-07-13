@@ -40,7 +40,7 @@ class SqueezeAndExcitation3DTest(unittest.TestCase):
 class UnknownSqueezeAndExcitationTest(unittest.TestCase):
 
     def test_unknown_squeeze_and_excitation(self):
-        from useful_layers.layers.se.squeeze_and_excitation import _SqueezeAndExcitation
+        from useful_layers.layers.squeeze_and_excitation import _SqueezeAndExcitation
 
         class DummySE(_SqueezeAndExcitation):
             self.conv1 = torch.nn.Conv2d(5, 1, 1)
@@ -53,6 +53,7 @@ class UnknownSqueezeAndExcitationTest(unittest.TestCase):
             self.fail("Unknown SqueezeAndExcitation layer passed")
         except NotImplementedError:
             pass
+
 
 if __name__ == '__main__':
     unittest.main()

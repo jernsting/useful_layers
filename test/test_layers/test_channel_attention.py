@@ -41,7 +41,7 @@ class ChannelAttention3DTest(unittest.TestCase):
 class UnknownChannelAttentionTest(unittest.TestCase):
 
     def test_unknown_channel_attention(self):
-        from useful_layers.layers.channel_attention.channel_attention import _ChannelAttention
+        from useful_layers.layers.channel_attention import _ChannelAttention
 
         class DummyAttention(_ChannelAttention):
             def __init__(self):
