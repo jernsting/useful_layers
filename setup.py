@@ -5,7 +5,7 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
-__version__ = '0.0a0.dev1'
+__version__ = '0.0a0.dev2'
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()

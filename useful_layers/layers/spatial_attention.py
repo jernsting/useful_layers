@@ -54,6 +54,7 @@ class SpatialAttention2D(_SpatialAttention):
         """
         self.in_channels = in_channels
         self.kernel_size = kernel_size
+        self.batch_norm = None
         if batch_norm:
             self.batch_norm = nn.BatchNorm2d
         self.conv = nn.Conv2d
@@ -79,6 +80,7 @@ class SpatialAttention3D(_SpatialAttention):
         """
         self.in_channels = in_channels
         self.kernel_size = kernel_size
+        self.batch_norm = None
         if batch_norm:
             self.batch_norm = nn.BatchNorm3d
         self.conv = nn.Conv3d

@@ -8,7 +8,7 @@ Simple SpatialAttention for 2D filters.
 | Parameter | type | Description |
 | -----     | ----- | ----- |
 | in_channels | int | Number of input channels|
-| kernel_size | int, default=7 | Filter size vor CNN |
+| kernel_size | int, default=7 | Filter size for convolution filter |
 | batch_norm  | bool, default=True | If true batch normalization is applied |
 
 #### Return Value
@@ -36,7 +36,7 @@ Simple SpatialAttention for 3D filters.
 | Parameter | type | Description |
 | -----     | ----- | ----- |
 | in_channels | int | Number of input channels|
-| kernel_size | int, default=7 | Filter size for CNN |
+| kernel_size | int, default=7 | Filter size for convolution filter |
 | batch_norm  | bool, default=True | If true batch normalization is applied |
 
 #### Return Value
