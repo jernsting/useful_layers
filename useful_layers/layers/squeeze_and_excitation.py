@@ -1,5 +1,4 @@
 import torch
-from torch.nn import functional as F
 
 from useful_layers.utils import reduction_network
 from useful_layers.layers.ABCLayer import Layer
@@ -20,7 +19,7 @@ class _SqueezeAndExcitation(Layer):
         else:
             raise NotImplementedError(f'Expected to be SqueezeAndExcitation2D or -3D, got {self}')
         out = torch.mean(x.view(size[0], size[1], -1), dim=-1).view(*view)
-        out = F.relu(self.conv1(out))
+        out = torch.relu(self.conv1(out))
         out = self.conv2(out)
         return torch.sigmoid(out)
 

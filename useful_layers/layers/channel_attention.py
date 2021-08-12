@@ -1,5 +1,4 @@
 import torch
-from torch.nn import functional as F
 
 from useful_layers.utils import reduction_network
 from useful_layers.layers.ABCLayer import Layer
@@ -21,9 +20,9 @@ class _ChannelAttention(Layer):
             raise NotImplementedError(f'Expected to be ChannelAttention2D or -3D, got {self}')
         avg_comp = torch.mean(x.view(size[0], size[1], -1), dim=-1).view(*view)
         max_comp = torch.max(x.view(size[0], size[1], -1), dim=-1).values.view(*view)
-        avg_comp = self.conv2(F.relu(self.conv1(avg_comp)))
-        max_comp = self.conv2(F.relu(self.conv1(max_comp)))
-        return F.sigmoid(avg_comp + max_comp)
+        avg_comp = self.conv2(torch.relu(self.conv1(avg_comp)))
+        max_comp = self.conv2(torch.relu(self.conv1(max_comp)))
+        return torch.sigmoid(avg_comp + max_comp)
 
 
 class ChannelAttention2D(_ChannelAttention):

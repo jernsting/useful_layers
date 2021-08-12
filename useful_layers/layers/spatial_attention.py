@@ -2,7 +2,6 @@ from abc import ABC
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 from useful_layers.layers.ABCLayer import Layer
 
@@ -31,7 +30,7 @@ class _SpatialAttention(Layer, ABC):
         attention_map = self.spacial_conv(conv_input)
         if self.batch_norm:
             attention_map = self.batch_norm(attention_map)
-        attention_map = F.sigmoid(attention_map)
+        attention_map = torch.sigmoid(attention_map)
         return attention_map
 
 
